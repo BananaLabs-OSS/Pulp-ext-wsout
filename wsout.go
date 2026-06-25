@@ -94,6 +94,7 @@ const (
 	codeMemRead     = 2
 	codeDecode      = 3
 	codeDialFailed  = 4
+	codeSendFailed  = 5
 	codeNoSession   = 6
 	codeAllocFailed = 7
 	codeMemWrite    = 8
@@ -291,7 +292,7 @@ func wsoutSend(m api.Module, id, dataPtr, dataLen uint32) uint32 {
 		return codeMemRead
 	}
 	if err := s.conn.WriteMessage(websocket.BinaryMessage, data); err != nil {
-		return codeDialFailed
+		return codeSendFailed
 	}
 	return codeOK
 }
